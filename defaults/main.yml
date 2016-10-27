@@ -1,2 +1,25 @@
 ---
 # defaults file for logrotate
+
+logrotate_conf_dir: "/etc/logrotate.d/"
+logrotate_scripts: []
+
+## Nginxのデフォルトの設定を記述する例
+#logrotate_scripts:
+#  - name: nginx
+#    paths:
+#      - /var/log/nginx/*log
+#    options:
+#      - daily
+#      - missingok
+#      - rotate 52
+#      - compress
+#      - delaycompress
+#      - notifempty
+#      - create 640 nginx adm
+#      - sharedscripts # postrotateをローテート時に1回だけ実行
+#    scripts:
+#      postrotate: |
+#        if [ -f /var/run/nginx.pid ]; then
+#          kill -USR1 `cat /var/run/nginx.pid`
+#        fi
