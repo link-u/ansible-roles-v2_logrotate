@@ -1,13 +1,13 @@
 ---
-# tasks file for logrotate
+# tasks/main.yml (logrotate)
+# Prefix : logrotate
 
-- name: Install logrotate
-  package:
-    name: logrotate
-    state: present
+- name: Install tasks
+  import_tasks: install.yml
+  when:
+    - logrotate_install_flag | bool
+  tags: ["install"]
 
-- name: Setup logrotate.d scripts
-  template:
-    src: logrotate.d.j2
-    dest: "{{ logrotate_conf_dir }}{{ item.name }}"
-  with_items: "{{ logrotate_scripts }}"
+- name: Configure tasks
+  import_tasks: configure.yml
+  tags: ["configure"]

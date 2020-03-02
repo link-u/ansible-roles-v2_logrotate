@@ -1,9 +1,14 @@
 ---
-# defaults file for logrotate
+# defaults/main.yml (logrotate)
+# Prefix : logrotate
 
+### インストール設定 ###############################################################################
+## 基本設定
+logrotate_install_flag: True  # インストールフラグ
 logrotate_conf_dir: "/etc/logrotate.d/"
-logrotate_scripts: []
+logrotate_scripts: []  # ↓に設定例を示す.
 
+### logrotate 設定例 ##############################################################################
 ## Nginxのデフォルトの設定を記述する例
 #logrotate_scripts:
 #  - name: nginx
