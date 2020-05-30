@@ -1,58 +1,54 @@
-Logrotate
-=========
+## Logrotate
+
+## 概要
 
 logrotateの設定用role
 
-Requirements
-------------
+## 動作確認バージョン
 
-Ubuntu 16.04
+- Ubuntu 18.04 (bionic)
+- ansible >= 2.8
+- Jinja2 2.10.3
 
-Role Variables
---------------
+## 使い方 (ansible)
+
+### Role variables
 
 ```yaml
+### インストール設定 ###############################################################################
+## 基本設定
+logrotate_install_flag: True  # インストールフラグ
 logrotate_conf_dir: "/etc/logrotate.d/"
-logrotate_scripts:
-  - name: nginx
-    paths:
-      - /var/log/nginx/*log
-    options:
-      - daily
-      - missingok
-      - rotate 52
-      - compress
-      - delaycompress
-      - notifempty
-      - create 640 nginx adm
-      - sharedscripts # postrotateをローテート時に1回だけ実行
-    scripts:
-      postrotate: |
-        if [ -f /var/run/nginx.pid ]; then
-          kill -USR1 `cat /var/run/nginx.pid`
-        fi
+logrotate_scripts: []  # ↓に設定例を示す.
+
+### logrotate 設定例 ##############################################################################
+## Nginxのデフォルトの設定を記述する例
+#logrotate_scripts:
+#  - name: nginx
+#    paths:
+#      - /var/log/nginx/*log
+#    options:
+#      - daily
+#      - missingok
+#      - rotate 52
+#      - compress
+#      - delaycompress
+#      - notifempty
+#      - create 640 nginx adm
+#      - sharedscripts # postrotateをローテート時に1回だけ実行
+#    scripts:
+#      postrotate: |
+#        if [ -f /var/run/nginx.pid ]; then
+#          kill -USR1 `cat /var/run/nginx.pid`
+#        fi
 ```
 
-Dependencies
-------------
+### Example playbook
 
-None
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: logrotate, tags: ["logrotate"] }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-Link-U Inc.
+```yaml
+- hosts:
+    - servers
+  become: True
+  roles:
+    - { role: logrotate, tags: ["logrotate"] }
+```
