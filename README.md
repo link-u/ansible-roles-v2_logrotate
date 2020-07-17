@@ -54,3 +54,6 @@ logrotate_scripts: []  # ↓に設定例を示す.
   roles:
     - { role: logrotate, tags: ["logrotate"] }
 ```
+
+## License
+MIT
