@@ -1,5 +1,7 @@
 ## Logrotate
 
+![ansible ci](https://github.com/link-u/ansible-roles-v2_logrotate/workflows/ansible%20ci/badge.svg)
+
 ## 概要
 
 logrotateの設定用role
@@ -52,3 +54,6 @@ logrotate_scripts: []  # ↓に設定例を示す.
   roles:
     - { role: logrotate, tags: ["logrotate"] }
 ```
+
+## License
+MIT
